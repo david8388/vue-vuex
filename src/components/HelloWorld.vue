@@ -1,14 +1,12 @@
 <template>
   <div class="hello">
-    <h1>The count is {{ fetchCount }}</h1>
-    <button
-      class="btn btn-primary"
-      @click="increment"
-    >Increase</button>
-    <button
-      class="btn btn-primary"
-      @click="decrement"
-    >Decrease</button>
+    <div
+      :key="item.id"
+      v-for="item in TODOS"
+    >
+      {{ item.title }}
+    </div>
+    <button @click="GET_TODO">Get Todos</button>
   </div>
 </template>
 
@@ -23,11 +21,10 @@ export default {
     }
   },
   computed: mapGetters([
-    'fetchCount'
+    'TODOS'
   ]),
   methods: mapActions([
-    'increment',
-    'decrement'
+    'GET_TODO'
   ])
 }
 </script>

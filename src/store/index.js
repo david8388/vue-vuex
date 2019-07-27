@@ -4,21 +4,37 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  count: 0
+  todos: []
 }
 
 const getters = {
-  fetchCount: state => state.count
+  TODOS: state => state.todos
 }
 
 const mutations = {
-  increment: state => state.count++,
-  decrement: state => state.count--
+  SET_TODO: (state, payload) => {
+    state.todos = payload
+  },
+  ADD_TODO: (state, payload) => {
+    state.TODOS.push(payload)
+  }
 }
 
 const actions = {
-  increment: ({ commit }) => commit('increment'),
-  decrement: ({ commit }) => commit('decrement')
+  GET_TODO: (context, payload) => {
+    setTimeout(() => {
+      const data = [
+        { id: 1, title: 'do laundry' },
+        { id: 2, title: 'do housework' }
+      ]
+      context.commit('SET_TODO', data)
+    }, 500)
+  },
+  SAVE_TODO: (context, payload) => {
+    setTimeout(() => {
+      context.commit('ADD_TODO', payload)
+    }, 500)
+  }
 }
 
 export const store = new Vuex.Store({
